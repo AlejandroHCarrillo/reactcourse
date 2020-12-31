@@ -1,3 +1,10 @@
+
+# Galeria de Gifs
+https://developers.giphy.com/dashboard/
+
+# Animaciones
+https://animate.style/
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
