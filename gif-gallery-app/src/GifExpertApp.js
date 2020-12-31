@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { CategoryAdd } from "./components/CategoryAdd";
+import GifGrid from "./components/GifGrid";
 
 // Usar snipped rafc para crear el esquleto del compnente
 export const GifExpertApp = () => {
@@ -21,9 +22,10 @@ export const GifExpertApp = () => {
           <hr/>  
           {/* <button onClick={ handleAdd }>Agregar</button> */}
           <ol>
-              { categories.map( (cat, i) => {
-                  return <li key={cat}>{ cat }</li>
-              }) }
+              { categories.map( category => (
+                  <GifGrid key={category} category = {category} />
+                )) 
+              }
           </ol>
         </>
     )
