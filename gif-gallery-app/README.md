@@ -1,9 +1,35 @@
+# Ver Proyecto 
+https://alejandrohcarrillo.github.io/reactcourse/
 
 # Galeria de Gifs
 https://developers.giphy.com/dashboard/
 
 # Animaciones
 https://animate.style/
+
+# Pruebas
+
+## Instalar Enzyme 
+https://enzymejs.github.io/enzyme/
+
+npm i --save-dev enzyme enzyme-adapter-react-16
+
+## configurar Enzyme
+import Enzyme from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
+
+Enzyme.configure({ adapter: new Adapter() });
+
+## Instalar Enzyme to JSON
+https://www.npmjs.com/package/enzyme-to-json
+
+## configurar Enzyme to JSON
+import {createSerializer} from 'enzyme-to-json';
+expect.addSnapshotSerializer(createSerializer({mode: 'deep'}));
+
+
+Usar shallow y wraper
+
 
 # Getting Started with Create React App
 
