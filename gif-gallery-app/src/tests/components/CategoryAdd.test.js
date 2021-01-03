@@ -34,6 +34,37 @@ describe('Probando el componente CategoryAdd', () => {
         expect(setCategories).not.toHaveBeenCalled()
     })
     
+    test('debe de simular una busqueda completa ', () => {
+        // 1. simular input change
+        const txtInput = wrapper.find('input');
+        const expValue = "Esta es un texto de prueba";
+        txtInput.simulate('change', { target: { value: expValue }});        
+        expect( wrapper.find('h2').text().trim() ).toBe( expValue );
+
+        // 2. simular submit
+        wrapper.find('form').simulate('submit', { preventDefault(){} });
+        
+        // 3. validar que setCategories se haya llamado al menos una vez
+        expect(setCategories).toHaveBeenCalled();
+        expect(setCategories).toHaveBeenCalledTimes(1);
+
+        // verifica que el parametro mandado halla sido una funcion 
+        expect(setCategories).toHaveBeenCalledWith( expect.any(Function));
+        
+        // 4. verificar que el input values este vacio al final
+        // console.log(txtInput.props());
+        // console.log('value: ', txtInput.prop('value'));
+        expect(wrapper.find('h2').text().trim()).toBe('');  // Validacion de valor vacio usando ''
+        expect(wrapper.find('h2').text().trim().length).toBe(0); // Validacion de valor vacio usando length = 0
+
+        expect(wrapper.find('input').prop('value')).toBe('');  // Validacion de valor del INPUT vacio usando ''
+        expect(wrapper.find('input').prop('value').length).toBe(0); // Validacion de valor del INPUT vacio usando length = 0
+
+    })
+
+
+    
+    
 
     
 

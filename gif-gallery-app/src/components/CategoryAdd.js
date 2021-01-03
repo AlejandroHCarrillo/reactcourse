@@ -12,7 +12,7 @@ export const CategoryAdd = ( { setCategories } ) => {
     }
 
     const submitHandler = (e) =>{
-        console.log("submit ha sido disparado", inputValue, e);
+        // console.log("submit ha sido disparado", inputValue, e);
         e.preventDefault();        
         
         if (inputValue.trim().length>0){
