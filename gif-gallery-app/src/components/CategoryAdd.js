@@ -7,7 +7,7 @@ export const CategoryAdd = ( { setCategories } ) => {
     const [inputValue, setInputValue] = useState(initialState);
 
     const inputChangeHandler = (e) =>{
-        // console.log(e.target.value);
+        console.log("inputchange disparado ", e.target.value);
         setInputValue(e.target.value);
     }
 
