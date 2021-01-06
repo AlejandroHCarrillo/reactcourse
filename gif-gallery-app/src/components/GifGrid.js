@@ -1,10 +1,9 @@
-// import React, { useEffect, useState } from 'react'
-import React, { createRef } from 'react'
+import { react } from 'react'
 import { useFetchGifs } from '../hooks/useFetchGifs';
-// import { getGifs } from '../helpers/getGifs';
 import { GridItem } from './GridItem';
+import PropTypes from 'prop-types'
 
-const GifGrid = ( { category } ) => {
+export const GifGrid = ( { category } ) => {
 
     // console.log(category);
     const { data: images, loading} = useFetchGifs( category );
@@ -22,7 +21,7 @@ const GifGrid = ( { category } ) => {
             { loading && <p className=" animate__animated animate__flash">'Cargando...'</p> }
             <div className="card-grid">
                 { images.map( img => (
-                    <GridItem key={img.id} img={img} />
+                    <GridItem key={img.id} img = { img } />
                 )) 
                 }
             </div>
@@ -30,4 +29,6 @@ const GifGrid = ( { category } ) => {
     )
 }
 
-export default GifGrid
+GifGrid.propTypes = {
+    category: PropTypes.string.isRequired
+}

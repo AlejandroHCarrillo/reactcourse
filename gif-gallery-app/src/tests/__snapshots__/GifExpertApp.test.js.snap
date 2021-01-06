@@ -1,0 +1,36 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`puebas al componente principal GifExpertApp should mostrarse correctamente 1`] = `
+<Fragment>
+  <h2>
+    GifExpertApp
+  </h2>
+  <CategoryAdd
+    setCategories={[Function]}
+  />
+  <hr />
+  <ol />
+</Fragment>
+`;
+
+exports[`puebas al componente principal GifExpertApp should mostrarse correctamente 2`] = `
+<Fragment>
+  <h2>
+    GifExpertApp
+  </h2>
+  <CategoryAdd
+    setCategories={[Function]}
+  />
+  <hr />
+  <ol>
+    <GifGrid
+      category="batman"
+      key="batman"
+    />
+    <GifGrid
+      category="superman"
+      key="superman"
+    />
+  </ol>
+</Fragment>
+`;

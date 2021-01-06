@@ -1,0 +1,53 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Probando componente principal GifGrid  should mostrar elementos cuando se usa el usaUseFetchGifs  1`] = `
+<Fragment>
+  <h3
+    className="animate__animated animate__fadeIn"
+  >
+    spiderman
+  </h3>
+  <div
+    className="card-grid"
+  >
+    <GridItem
+      img={
+        Object {
+          "id": "qazw3erds",
+          "title": "imagende prueba 1",
+          "url": "http://localhost/imagenes/ficticias/mock1.jpg",
+        }
+      }
+      key="qazw3erds"
+    />
+    <GridItem
+      img={
+        Object {
+          "id": "qwerty",
+          "title": "imagen de prueba 2",
+          "url": "http://localhost/imagenes/ficticias/mock2.jpg",
+        }
+      }
+      key="qwerty"
+    />
+  </div>
+</Fragment>
+`;
+
+exports[`Probando componente principal GifGrid  should renderizar el componente en estado inicial 1`] = `
+<Fragment>
+  <h3
+    className="animate__animated animate__fadeIn"
+  >
+    spiderman
+  </h3>
+  <p
+    className=" animate__animated animate__flash"
+  >
+    'Cargando...'
+  </p>
+  <div
+    className="card-grid"
+  />
+</Fragment>
+`;
