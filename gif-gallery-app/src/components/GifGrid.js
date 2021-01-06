@@ -1,4 +1,3 @@
-import { react } from 'react'
 import { useFetchGifs } from '../hooks/useFetchGifs';
 import { GridItem } from './GridItem';
 import PropTypes from 'prop-types'
@@ -8,12 +7,7 @@ export const GifGrid = ( { category } ) => {
     // console.log(category);
     const { data: images, loading} = useFetchGifs( category );
 
-    // console.log( images, loading);
-
-    // const [images, setImages] = useState([]);
-    // useEffect( () => {
-    //     getGifs(category).then( setImages )
-    // }, [category])
+    // console.log( 'gifgrid', images, loading);
     
     return (
         <>
@@ -21,7 +15,8 @@ export const GifGrid = ( { category } ) => {
             { loading && <p className=" animate__animated animate__flash">'Cargando...'</p> }
             <div className="card-grid">
                 { images.map( img => (
-                    <GridItem key={img.id} img = { img } />
+                    // <GridItem key={img.id} img = { img } />
+                    <GridItem key={img.id} title = { img.title } url = { img.url } />
                 )) 
                 }
             </div>
