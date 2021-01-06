@@ -2,6 +2,8 @@ import { react } from 'react'
 import { shallow } from "enzyme"
 import { GridItem } from "../../components/GridItem"
 
+import '@testing-library/jest-dom'; // libreria que sirve para tener la ayuda del expect
+
 describe('probando el GridItem', () => {
     
     const title = "titulo";
@@ -20,6 +22,7 @@ describe('probando el GridItem', () => {
     });
 
     test('should contains a pharagraph with the title', () => {
+        // Verifica que la renderizacion contenga un texto igual al titulo
         const p = wrapper.find('p');
         // console.log(p.html());
         expect(p.text().trim()).toBe(title);
@@ -35,7 +38,7 @@ describe('probando el GridItem', () => {
     });
     
     test('should verify the div contains the class animate__fadeIn', () => {
-        // Ejemplo de como verificar las propiedades de un elemento del HTML
+        // Ejemplo de como verificar que un elemento contenga una class de css en el elemento de HTML
         const classExpected = "animate__fadeIn";
         const div = wrapper.find('div');
         // console.log(i.html());

@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import { CategoryAdd } from "./components/CategoryAdd";
-import GifGrid from "./components/GifGrid";
+import { GifGrid } from "./components/GifGrid";
+// import PropTypes from 'prop-types'
 
 // Usar snipped rafc para crear el esquleto del compnente
-export const GifExpertApp = () => {
+export const GifExpertApp = ( { defaultCategories = [] } ) => {
 
-    const initialState = ['batman'];
-    const [categories, setCategories] = useState(initialState);
+    // const defaultCategories = ['batman'];
+    const [categories, setCategories] = useState(defaultCategories);
     
     // const handleAdd = () =>{
     //     // categories.push('Wonder Woman');
@@ -30,3 +31,7 @@ export const GifExpertApp = () => {
         </>
     )
 }
+
+// GifExpertApp.propTypes = {
+//   defaultCategories: PropTypes.array.isRequired
+// }

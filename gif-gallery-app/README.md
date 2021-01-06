@@ -30,6 +30,9 @@ expect.addSnapshotSerializer(createSerializer({mode: 'deep'}));
 
 Usar shallow y wraper
 
+## instalar libreria para hacer las pruebas a los hooks personalizados
+https://react-hooks-testing-library.com/
+
 
 # Getting Started with Create React App
 
