@@ -33,7 +33,7 @@ export const Message = () => {
             <h3>U R great!!</h3>
 
             <p>
-                (x:{x}, y:{x})
+                (x:{x}, y:{y})
             </p>
         </div>
     )
