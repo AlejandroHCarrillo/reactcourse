@@ -9,11 +9,6 @@ const initialState = [];
 
 const init = () => {
     return JSON.parse(localStorage.getItem('todos')) || [];
-//     return [{
-//         id: new Date().getTime(),
-//         desc: 'Estudiar',
-//         done: false
-//     }];
 }
 
 export const TodoApp = () => {
@@ -32,8 +27,6 @@ export const TodoApp = () => {
     }, [todos])
 
     // console.log(description);
-
-
 
     const handleDelete = (todoId) => {
         console.log("Delete tarea");
@@ -65,31 +58,13 @@ export const TodoApp = () => {
 
             <div className="row">
                 <div className="col-7">
-                    <TodoList todos={todos} handleDelete = { handleDelete } handleToggle = { handleToggle } />
-
-                    {/* <ul className="list-group list-group-flush">
-                        { 
-                            todos.map( (t, i) =>  (
-                                <li key={t.id}
-                                className="list-group-item"
-                                >
-                                    <p className= { `${ t.done && 'complete' }` }
-                                        onClick={ () => handleToggle(t.id) }
-                                    >
-                                        {i+1}. {t.desc}
-                                    </p>
-
-                                    <button className="btn btn-danger"
-                                        onClick = { () => handleDelete(t.id) }
-                                    >Eliminar</button>
-                                </li>  
-                            ) ) 
-                        }
-                        
-                    </ul> */}
+                    <TodoList todos={todos}
+                        key={1} 
+                        handleDelete = { handleDelete } 
+                        handleToggle = { handleToggle } />
                 </div>
                 <div className="col-5"> 
-                    <TodoAdd handleAddTodo = {handleAddTodo} />
+                    <TodoAdd handleAddTodo = { handleAddTodo } />
                 </div>
 
             </div>

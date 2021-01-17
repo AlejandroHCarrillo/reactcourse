@@ -20,7 +20,7 @@ export const AboutScreen = () => {
             <button className="btn btn-warning" 
                 onClick={ handleLogout }
             >
-                Logiout
+                Logout
             </button>
         </>
     )

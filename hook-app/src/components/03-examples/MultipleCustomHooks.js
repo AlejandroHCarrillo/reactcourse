@@ -8,7 +8,7 @@ export const MultipleCustomHooks = () => {
 
     const {loading, data} = useFetch('https://www.breakingbadapi.com/api/quotes/'+counter);
 
-    console.log(loading);
+    // console.log(loading);
     // la expresion !!data && data[0] es una validacion
     // !!data significa que si hay datos
     // null no es un valor manejable pero si negamos null entonces 
@@ -19,7 +19,7 @@ export const MultipleCustomHooks = () => {
     // la cual regresa la informacion de data[0] cuando data sea != null
     const {author, quote} = !!data && data[0];
 
-    console.log(author, quote);
+    // console.log(author, quote);
     return (
         <>
             <h1>Frases celebres de Breaking Bad</h1>

@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Probar el TodoAdd should mostrar el componente 1`] = `
+<Fragment>
+  <h4>
+    Agregar tarea:
+  </h4>
+  <hr />
+  <form
+    onSubmit={[Function]}
+  >
+    <div
+      className="d-grid gap-2"
+    >
+      <input
+        autoComplete="off"
+        className="form-control"
+        name="description"
+        onChange={[Function]}
+        placeholder="Escriba la tarea"
+        type="text"
+        value=""
+      />
+      <button
+        className="btn btn-outline-success mt-1 btn-block"
+        type="submit"
+      >
+        Agregar tarea +
+      </button>
+    </div>
+  </form>
+</Fragment>
+`;
