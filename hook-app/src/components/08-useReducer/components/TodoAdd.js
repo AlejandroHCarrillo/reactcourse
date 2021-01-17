@@ -7,7 +7,6 @@ export const TodoAdd = ({handleAddTodo}) => {
         description: ''
     });
 
-
     const handleSubmit = (e) =>{
         e.preventDefault();
         if(description.length <= 0){

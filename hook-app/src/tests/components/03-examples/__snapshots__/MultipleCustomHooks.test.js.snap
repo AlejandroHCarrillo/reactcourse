@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Probando el componente MultipleCustomHooks should mostrar el componente 1`] = `
+<Fragment>
+  <h1>
+    Frases celebres de Breaking Bad
+  </h1>
+  <h3>
+    usando multiple custom hooks!!!
+  </h3>
+  <hr />
+  <div
+    className="alert alert-info text-center"
+  >
+    Loading...
+  </div>
+  <button
+    className="btn btn-primary"
+    onClick={[Function]}
+  >
+    Siguiente
+  </button>
+</Fragment>
+`;

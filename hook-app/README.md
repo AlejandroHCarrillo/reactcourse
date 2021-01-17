@@ -1,3 +1,29 @@
+
+# Instalaciones para pruebas
+## Enzime
+https://enzymejs.github.io/enzyme/
+
+npm i --save-dev enzyme enzyme-adapter-react-16
+
+## Enzyme to json
+https://www.npmjs.com/package/enzyme-to-json
+
+npm install --save-dev enzyme-to-json
+
+## Testing hooks Library
+https://react-hooks-testing-library.com/
+
+
+## Crear archivo setupTest.js
+import Enzyme from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
+import {createSerializer} from 'enzyme-to-json';
+ 
+Enzyme.configure({ adapter: new Adapter() });
+expect.addSnapshotSerializer(createSerializer({mode: 'deep'}));
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
