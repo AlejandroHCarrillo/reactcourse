@@ -350,3 +350,5 @@ MigrationBackup/
 .ionide/
 
 hook-app/.eslintcache
+
+heroes-app/.eslintcache
