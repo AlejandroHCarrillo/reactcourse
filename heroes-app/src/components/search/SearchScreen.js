@@ -18,7 +18,6 @@ export const SearchScreen = ({ history }) => {
     console.log("q:", q);
 
     // console.log("searchTextparam: ", searchTextParam);
-    const [heroesfound, setHeroesfound] = useState({});
     
     const [ { busquedaText }, taskInputChangeHandler, reset ] = useForm({
         busquedaText: q
@@ -30,12 +29,6 @@ export const SearchScreen = ({ history }) => {
     const handleSearch = (e) => {
         e.preventDefault();
             history.push(`?q=${busquedaText}`);
-            
-            // console.log("handleSearch: ", busquedaText );        
-            // const heroesfound = searchHeroes(busquedaText);
-            // console.log( heroesfound );
-                        
-            // reset();
         };
         
 

@@ -22,6 +22,7 @@ export const DashboardRoutes = () => {
                     <Route exact path="/search/" component={ SearchScreen } />
                     <Route exact path="/notfound" component={ NotFoundScreen } />
                     <Route exact path="/home" component={ HomeScreen } />
+                    <Route exact path="/" component={ HomeScreen } />
 
                     <Redirect to="/notfound"/>
                 </Switch>
