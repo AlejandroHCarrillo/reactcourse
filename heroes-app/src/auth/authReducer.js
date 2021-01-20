@@ -6,7 +6,9 @@ export const authReducer = ( state = {}, action) => {
     //     name: '',
     //     logged: true
     // };
+
     console.log("Entrado al auth reducer: ", state);
+    console.log(action);
     switch (action.type) {
         case types.login:
             return{

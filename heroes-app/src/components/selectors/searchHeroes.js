@@ -1,7 +1,7 @@
 import { heroes } from "../../data/heroes";
 
 export const searchHeroes = ( searchPhrase = '' ) =>{
-    console.log('searchPhrase: ', searchPhrase);
+    // console.log('searchPhrase: ', searchPhrase);
     if( searchPhrase === '' ){
         return [];
     }
