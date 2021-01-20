@@ -2,17 +2,19 @@ import React, { useContext } from 'react';
 import { Link, NavLink, useHistory } from 'react-router-dom';
 import { AuthContext } from '../../auth/AuthContext';
 import { types } from '../../types/types';
-import { HomeScreen } from '../home/HomeScreen';
 
 export const Navbar = ( ) => {
     const { user, dispatch } =  useContext(AuthContext);
+
+    //hook de history para acceder al 
     const history = useHistory();
     
-    const handleLogin = () => {
-        // history.push('/login');
-    }
+    // const handleLogin = () => {
+    //     // history.push('/login');
+    // }
 
     const handleLogout = () => {
+        // console.log('Boton logout clicked!!!');
         history.replace('/login');
         dispatch({
             type: types.logout

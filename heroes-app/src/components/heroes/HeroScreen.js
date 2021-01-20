@@ -6,10 +6,10 @@ export const HeroScreen = ({ history }) => {
     
     const { heroeId } = useParams();
 
-    // console.log(heroeId);
-    // console.log(heroe);
+    // console.log("heroeId: ", heroeId);
     // const heroe = getHeroeById(heroeId);
     const heroe = useMemo(() => getHeroeById(heroeId), [heroeId]);
+    // console.log("heroe: ", heroe);
     
     if( !heroe ){
         return <Redirect to="/notfound"/>

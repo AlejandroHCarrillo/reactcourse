@@ -1,8 +1,7 @@
-import React, { useMemo, useState } from 'react'
-import { useLocation, useParams } from 'react-router-dom';
+import React, { useMemo } from 'react'
+import { useLocation } from 'react-router-dom';
 import queryString from 'query-string'
 
-import { heroes } from '../../data/heroes';
 import { useForm } from '../../hooks/useForm';
 import { HeroeCard } from '../heroes/HeroeCard';
 import { searchHeroes } from '../selectors/searchHeroes';
@@ -15,7 +14,7 @@ export const SearchScreen = ({ history }) => {
 
     const { q='' } = queryString.parse(location.search);
 
-    console.log("q:", q);
+    // console.log("q:", q);
 
     // console.log("searchTextparam: ", searchTextParam);
     
@@ -24,7 +23,7 @@ export const SearchScreen = ({ history }) => {
     });
 
     const heroesFiltered = useMemo(() => searchHeroes(q), [q]);
-    console.log("heroesFiltered: ", heroesFiltered);
+    // console.log("heroesFiltered: ", heroesFiltered);
     
     const handleSearch = (e) => {
         e.preventDefault();
@@ -55,12 +54,11 @@ export const SearchScreen = ({ history }) => {
 
                 </div>
                 <div className="col-7">
-                    <h4>Resultados:</h4>
+                    <h4>Resultados encontrados ({ heroesFiltered.length })</h4>
                     <hr/>
                     {
-                        q !== '' && heroesFiltered.length===0  && <p className="alert alert-danger" role="alert">No se encontraron heroes con ese criterio de busqueda "{ q }" </p>
+                        q !== '' && heroesFiltered.length===0  && <p className="alert alert-danger" role="alert">No se encontraron heroes con ese criterio de busqueda "{ q }"</p>
                     }
-
                     {
                         heroesFiltered.map( h => {
                             return(<HeroeCard key={h.id} {...h}/> )

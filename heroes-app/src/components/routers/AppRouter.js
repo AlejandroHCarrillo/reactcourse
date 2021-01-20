@@ -15,7 +15,7 @@ export const AppRouter = () => {
   const { user } =  useContext(AuthContext);
   const isAuthenticated = user && user.logged;
 
-  console.log("isAuthenticated: ", isAuthenticated);
+  // console.log("isAuthenticated: ", isAuthenticated);
 
     return (
       <Router>
