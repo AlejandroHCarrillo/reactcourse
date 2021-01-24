@@ -373,16 +373,28 @@ import Swal from 'sweetalert2/dist/sweetalert2.js'
 
 ---
 
-## 
+## Momment
+Analizar, validar, manipular, y mostrar fechas y horas en JavaScript
+
+https://momentjs.com/
 
 ### Instalacion:
 ```
-
+npm install moment --save
 ```
 
 ### Configuracion:
 
 ```
+
+```
+### Format Dates
+```
+moment().format('MMMM Do YYYY, h:mm:ss a'); // January 24th 2021, 3:02:04 am
+moment().format('dddd');                    // Sunday
+moment().format("MMM Do YY");               // Jan 24th 21
+moment().format('YYYY [escaped] YYYY');     // 2021 escaped 2021
+moment().format();    ```
 
 ```
 ---

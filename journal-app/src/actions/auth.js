@@ -1,4 +1,3 @@
-import { Redirect } from "react-router-dom";
 import Swal from "sweetalert2";
 import { firebase, googleAuthProvider } from "../firebase/firebaseConfig";
 import { types } from "../types/types";

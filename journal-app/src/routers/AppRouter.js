@@ -13,6 +13,7 @@ import { PublicRoute } from './PublicRoute';
 
 import { JournalScreen } from '../components/journal/JournalScreen';
 import { login } from '../actions/auth';
+import { startLoadingNotes } from '../actions/notes';
 
 export const AppRouter = () => {
     const dispatch = useDispatch();
@@ -23,11 +24,14 @@ export const AppRouter = () => {
 
     // Este efecto mantiene la autentificacion en caso de recargar el browser
     useEffect(() => {
-        firebase.auth().onAuthStateChanged( (user) =>{
+        firebase.auth().onAuthStateChanged( async(user) =>{
             // si estoy autenticado
             if (user?.uid){
                 dispatch( login(user.uid, user.displayName) );
                 setIsLoggedIn(true);
+
+                dispatch( startLoadingNotes(user.uid) );
+
             }
 
             // Cuando el usuario este autenticado
