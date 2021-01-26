@@ -399,4 +399,22 @@ moment().format();    ```
 ```
 ---
 
+## cloudinary
+Almacenamiento de imagenes y video en la nube
 
+https://cloudinary.com/
+
+### Instalacion:
+```
+
+```
+
+### Configuracion:
+```
+
+```
+### Uso
+```
+
+```
+---
