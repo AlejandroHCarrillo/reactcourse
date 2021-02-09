@@ -1,6 +1,54 @@
 # Enlaces y herramientas utiles para proyectos REACT
 Este documento lista algunas de las herramientas utilizadas en el desarrollo de herramientas web desarrolladas con REACT.
 
+Para crear un proyecto de React 
+
+```
+npx create-react-app [nombre-app]
+```
+
+Eliminar todos los archivos del directorio src solo dejar el index
+
+en el archivo index.js cambiar el componente App por la app que estemos desarrollando por ejemplo CalendarApp:
+```
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { CalendarApp } from './CalendarApp';
+
+ReactDOM.render(
+    <CalendarApp />,
+  document.getElementById('root')
+);
+```
+### crear un componente
+Los componentes se deben guardar en un directorio llamado components dentro de src. Se deben agrupar en subdirectorios dependiendo su uso o categoria. 
+
+Usar el snipped rafc
+```
+import React from 'react'
+
+export const LoginScreen = () => {
+    return (
+        <div>
+            
+        </div>
+    )
+}
+```
+
+### Directorios utiles
+A continuacion una lista de los direcctorios que pueden ser requeridos en el desarrollo de la app. 
+
+src/components: contiene los componentes necesarios en la app 
+src/helpers : contiene los archivos JS con funciones que pueden ser reutilizadas
+src/actions : contiene los archivos de acciones para cada store
+src/hooks   : contiene los hooks para el manejo de diferentes cosas
+src/store   : contiene el store el cual concentra los reducers que se usan en la app
+src/styles  : contiene los archivos de estilo
+src/routers : contiene los routers utilizados en la app
+src/types   : contiene un archivo con los enumeradores
+src/tests   : dentro de este folder replicaremos la misma estructura de src con los tests de los archivos.
+
 ## Enzime 
 
 Enzyme es una utilidad de prueba de JavaScript para React que facilita la prueba de la salida de sus componentes de React. También puede manipular, atravesar y, de alguna manera, simular el tiempo de ejecución dado el resultado.
@@ -75,6 +123,7 @@ npm install react-router-dom
 ```
 
 ### Configuracion:
+En el archivo 
 
 ```
 import React from "react";
