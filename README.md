@@ -399,4 +399,57 @@ moment().format();    ```
 ```
 ---
 
+## Almacenamiento de imagenes y video en la nube cloudinary
+Automatiza todo el ciclo de vida de gestión de imágenes Almacena, transforma, optimiza y entrega todos los activos multimedia con API, widgets o interfaz de usuario fácil de usar.
+
+https://cloudinary.com/
+
+SDK
+https://cloudinary.com/documentation
+https://cloudinary.com/documentation/node_integration
+
+https://cloudinary.com/documentation/image_upload_api_reference
+
+https://cloudinary.com/documentation/admin_api
+
+
+### Instalacion:
+```
+npm install cloudinary --save-dev
+```
+
+### Configuracion:
+```
+cloudinary.config({ 
+  cloud_name: 'sample', 
+  api_key: '874837483274837', 
+  api_secret: 'a676b67565c6767a6767d6767f676fe1' 
+});
+```
+### Uso
+```
+
+Delete images
+cloudinary.v2.api.delete_resources(public_ids, options, callback);
+```
+---
+
+## redux-mock-store
+redux-mock-store es un almacenamiento simulado para probar los creadores de acciones asíncronas y el middleware de Redux. El almacenamiento simulado creará una serie de acciones distribuidas que sirven como un registro de acciones para las pruebas.
+
+### Instalacion:
+```
+npm install redux-mock-store --save-dev
+
+```
+
+### Configuracion:
+```
+
+```
+### Uso
+```
+
+```
+---
 

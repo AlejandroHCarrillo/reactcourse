@@ -10,7 +10,7 @@ export const Sidebar = () => {
     const { name } = useSelector( state => state.auth );
 
     const handleLogout = () =>{
-        console.log('logging out...');
+        // console.log('logging out...');
         dispatch( startLogout() );
     }
 

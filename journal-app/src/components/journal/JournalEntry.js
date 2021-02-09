@@ -8,12 +8,13 @@ export const JournalEntry = ( { id, date, title, body, url } ) => {
     const dispatch = useDispatch();
 
     const handleEntryClick = () => {
+        // console.log('new note clicked');
         dispatch( activeNote(id, {date, title, body, url }) );
     }
 
     // console.log('JournalEntry.note: ', note);
     return (
-        <div className="journal__entry pointer"
+        <div className="journal__entry pointer animate__animated animate__fadeIn animate__faster"
             onClick={ handleEntryClick }
         >
         {

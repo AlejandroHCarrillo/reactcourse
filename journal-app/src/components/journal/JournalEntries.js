@@ -8,9 +8,6 @@ export const JournalEntries = () => {
 
     const { notes } = useSelector(state => state.notes);
 
-    console.log('[JournalEntries] notes: ', notes);
-    console.log('[JournalEntries] notes.length: ', notes.length);
-
     return (
         <div className="journal__entries">
             {

@@ -14,7 +14,7 @@ export const authReducer = ( state ={}, action )=>{
 
 
         default:
-            // console.log('[Auth reducer] No se pudo atender esta accion: ', action.key);
+            // console.log('[Auth reducer] No se pudo atender esta accion: ', action.type);
             return state;
     }
 }
