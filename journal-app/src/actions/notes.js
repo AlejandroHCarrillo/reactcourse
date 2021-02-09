@@ -1,5 +1,5 @@
 import Swal from "sweetalert2";
-import { db } from "../firebase/firebaseConfig";
+import { db } from "../firebase/firebase-config";
 import { fileUpload } from "../helpers/fileUpload";
 import { loadNotes } from "../helpers/loadNotes";
 import { types } from "../types/types";
@@ -17,11 +17,15 @@ export const startNewNote = () => {
             date: new Date().getTime()
         }
 
-        const docRef = await db.collection(`${uid}/journal/notes`).add(newNote);
-        // console.log(docRef);
-
-        dispatch ( activeNote( docRef.id, newNote ));
-        dispatch ( addNewNote( docRef.id, newNote ));
+        try{
+            const docRef = await db.collection(`${uid}/journal/notes`).add(newNote);
+            // console.log(docRef);
+            
+            dispatch ( activeNote( docRef.id, newNote ));
+            dispatch ( addNewNote( docRef.id, newNote ));
+        } catch(error) {
+            console.log(error);
+        }
     }
 };
 
@@ -64,7 +68,7 @@ export const startSavingNote = ( note ) => {
 
         // Eliminamos la propiedad url del objeto Si es nula 
         if (!note.url){
-            console.log("eliminamos el url si viene vacio");
+            // console.log("eliminamos el url si viene vacio");
             delete note.url
         };
 

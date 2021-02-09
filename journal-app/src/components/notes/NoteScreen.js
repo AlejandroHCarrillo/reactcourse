@@ -10,6 +10,8 @@ import { activeNote, startDeleting } from '../../actions/notes';
 export const NoteScreen = () => {
     const dispatch = useDispatch();
 
+    const { uid } = useSelector(state => state.auth );
+    // console.log("El id del usuario es: ", uid );
     const { active: note } = useSelector(state => state.notes );
     const [formValues, handleInputChange, reset] = useForm(note);
     const { title, body, date } = formValues;
@@ -32,7 +34,8 @@ export const NoteScreen = () => {
     // usamos formValues para que lo actualize 
     // cuando cambie cualquier valor del formulario 
     useEffect(() => {
-        dispatch( activeNote(formValues.uid, { ...formValues } ) );
+        // dispatch( activeNote(formValues.uid, { ...formValues } ) );
+        dispatch( activeNote(uid, { ...formValues } ) );
     }, [formValues, dispatch])
 
     const handleDelete = () => {

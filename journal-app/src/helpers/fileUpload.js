@@ -1,4 +1,5 @@
 export const fileUpload = async (file) => {
+    // console.log("Archivo a subir: ", file);
 
     const cloudUrl = 'https://api.cloudinary.com/v1_1/alexthegreat/upload';
 
@@ -13,10 +14,13 @@ export const fileUpload = async (file) => {
                                 body: formData
                                 });
         if( resp.ok ){
+            // console.log('subio OK');
             const cloudResp = await resp.json();
             return cloudResp.secure_url;
         } else {
-            throw await resp.json();            
+            // console.log('No subio', await resp.json());
+            // throw await resp.json();
+            return null;       
         }
         
     } catch (error) {

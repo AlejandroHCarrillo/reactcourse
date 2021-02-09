@@ -1,4 +1,4 @@
-import { db } from "../firebase/firebaseConfig"
+import { db } from "../firebase/firebase-config"
 
 export const loadNotes = async (uid) =>{
     // console.log('[loadNotes] uid: ', uid);

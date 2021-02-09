@@ -1,5 +1,5 @@
 import Swal from "sweetalert2";
-import { firebase, googleAuthProvider } from "../firebase/firebaseConfig";
+import { firebase, googleAuthProvider } from "../firebase/firebase-config";
 import { types } from "../types/types";
 import { finishLoading, startLoading } from "./ui";
 
@@ -9,7 +9,7 @@ export const startLoginWithEmailAndPassword = (email, password) =>{
 
         dispatch( startLoading() );
 
-        firebase.auth().signInWithEmailAndPassword(email, password)
+        return firebase.auth().signInWithEmailAndPassword(email, password)
         .then( ({ user }) => {
             // console.log(user);
             dispatch( login(user.uid, user.displayName) );
