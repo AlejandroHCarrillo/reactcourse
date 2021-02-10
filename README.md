@@ -49,7 +49,7 @@ src/routers : contiene los routers utilizados en la app
 src/types   : contiene un archivo con los enumeradores
 src/tests   : dentro de este folder replicaremos la misma estructura de src con los tests de los archivos.
 
-## Enzime 
+## Pruebas o Testing Enzime 
 
 Enzyme es una utilidad de prueba de JavaScript para React que facilita la prueba de la salida de sus componentes de React. También puede manipular, atravesar y, de alguna manera, simular el tiempo de ejecución dado el resultado.
 
@@ -72,7 +72,7 @@ Enzyme.configure({ adapter: new Adapter() });
 ```
 ---
 
-##  enzyme-to-json
+## Pruebas o Testing enzyme-to-json
 
 Convierte Enzyme wrappers a un formato compatible con Jest snapshot testing.
 
@@ -92,7 +92,7 @@ expect.addSnapshotSerializer(createSerializer({mode: 'deep'}));
 ```
 ---
 
-##  react-hooks-testing-library
+## Pruebas o Testing react-hooks-testing-library
 Utilidades de prueba simples y completas de React hooks que fomentan las buenas prácticas de prueba.
 
 React-hooks-testing-library le permite crear un arnés de prueba simple para React hooks que maneja su ejecución dentro del cuerpo de un componente de función, además de proporciona varias funciones de utilidad útiles para actualizar las entradas y recuperar las salidas de sus increíbles **hook personalizados**.
@@ -432,13 +432,20 @@ https://momentjs.com/
 npm install moment --save
 ```
 
-### Configuracion:
-
+### Configuracion styles:
 ```
-
+react-big-calendar/lib/css/react-big-calendar.css
 ```
 ### Format Dates
+https://momentjs.com/docs/#/displaying/format/
+
 ```
+moment().format();                                // "2014-09-08T08:02:17-05:00" (ISO 8601, no fractional seconds)
+moment().format("dddd, MMMM Do YYYY, h:mm:ss a"); // "Sunday, February 14th 2010, 3:25:50 pm"
+moment().format("ddd, hA");                       // "Sun, 3PM"
+moment().format("[Today is] dddd");               // "Today is Sunday"
+moment('gibberish').format('YYYY MM DD');         // "Invalid date"
+
 moment().format('MMMM Do YYYY, h:mm:ss a'); // January 24th 2021, 3:02:04 am
 moment().format('dddd');                    // Sunday
 moment().format("MMM Do YY");               // Jan 24th 21
@@ -502,3 +509,64 @@ npm install redux-mock-store --save-dev
 ```
 ---
 
+##  Font awesome
+Font awesome es una libreria de iconos 
+
+https://cdnjs.com/libraries/font-awesome
+
+### Instalacion:
+En el archivo index.html
+``` 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w==" crossorigin="anonymous" />
+``` 
+### Configuracion: 
+``` 
+
+``` 
+### Uso 
+``` 
+<span className="fas fa-sign-out-alt" > Salir</span>
+``` 
+---
+
+## Calendario react-big-calendar
+react-big-calendar es un componente de calendario de eventos creado para React y diseñado para navegadores modernos (lea: IE10 +) y utiliza flexbox sobre el enfoque clásico de ception tablas.
+
+https://www.npmjs.com/package/react-big-calendar
+
+### Instalacion: 
+``` 
+npm i react-big-calendar
+``` 
+### Configuracion: 
+https://github.com/jquense/react-big-calendar#readme
+``` 
+
+```
+### DEMO
+```
+http://jquense.github.io/react-big-calendar/examples/index.html
+``` 
+
+### Uso 
+``` 
+import { Calendar, momentLocalizer } from 'react-big-calendar'
+import moment from 'moment'
+
+// Setup the localizer by providing the moment (or globalize) Object
+// to the correct localizer.
+const localizer = momentLocalizer(moment)  // or globalizeLocalizer
+
+
+const MyCalendar = props => (
+  <div>
+    <Calendar
+      localizer={localizer}
+      events={myEventsList}
+      startAccessor="start"
+      endAccessor="end"
+    />
+  </div>
+)
+``` 
+---
