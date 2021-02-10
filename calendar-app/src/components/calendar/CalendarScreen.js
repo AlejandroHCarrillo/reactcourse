@@ -5,6 +5,7 @@ import moment from 'moment';
 import { messages } from '../../helpers/calendar-messages-es';
 import { Navbar } from '../ui/Navbar';
 import { CalendarEvent } from './CalendarEvent';
+import { CalendarEventModal } from './CalendarEventModal';
 
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import 'moment/locale/es';
@@ -91,6 +92,10 @@ export const CalendarScreen = () => {
                     event: CalendarEvent
                 }}
             />
+
+            <CalendarEventModal/>
+
         </div>
+
     )
 }
