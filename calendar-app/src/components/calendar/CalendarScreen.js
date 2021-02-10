@@ -1,10 +1,11 @@
 import React from 'react'
-import { AppRouter } from '../../routers/AppRouter'
+import { Navbar } from '../ui/Navbar'
 
 export const CalendarScreen = () => {
     return (
         <>
-            <h1>Calendar Screen works</h1>
+            {/* <h1>Calendar Screen works</h1> */}
+            <Navbar />
         </>
     )
 }
