@@ -1,8 +1,11 @@
 import React, { useState } from 'react'
-import Modal from 'react-modal';
+import { useDispatch, useSelector } from 'react-redux';
+
 import moment from 'moment';
+import Modal from 'react-modal';
 import DateTimePicker from 'react-datetime-picker';
 import Swal from 'sweetalert2';
+import { uiCloseModal } from '../../actions/ui';
 
 const customStyles = {
     content : {
@@ -21,6 +24,11 @@ const now = moment().minutes(0).seconds(0).add(1, 'hour');
 const nowPlus1 = now.clone().add(1,'hour');
 
 export const CalendarEventModal = () => {
+    const dispatch = useDispatch();
+
+    // leyendo el contenido del state ui del store
+    const { modalOpen } = useSelector( state => state.ui );
+    
     const [dateStart, setDateStart] = useState( now.toDate() );
     const [dateEnd, setDateEnd] = useState( nowPlus1.toDate() );
     const [titleIsValid, setTitleValid] = useState(true);
@@ -65,15 +73,10 @@ export const CalendarEventModal = () => {
 
     const handleSubimt = (e) => {
         e.preventDefault();
-        console.log(formValues);
+        // console.log(formValues);
 
         const momentStart = moment( start );
         const momentEnd = moment( end );
-
-        console.log("momentStart: ", momentStart.toDate());
-        console.log("momentEnd: ", momentEnd.toDate());
-
-        console.log("la fecha inicial es menor?  ", momentStart.isSameOrAfter(momentEnd.toDate()) );
 
         if ( momentStart.isSameOrAfter(momentEnd) ){
             const textError = 'La fecha fin debe ser mayor a la fecha inicial'
@@ -81,7 +84,6 @@ export const CalendarEventModal = () => {
             return Swal.fire('Error', textError, 'error' );
         }
 
-        console.log();
         if (title.trim().length <= 2){
             setTitleValid(false);
             return;
@@ -91,34 +93,22 @@ export const CalendarEventModal = () => {
         
         closeModal();
     }
-
-    const [modalIsOpen, setIsOpen] = React.useState(true);
-
-    // const openModal = () => {
-    //   setIsOpen(true);
-    // }
-    
-    // function afterOpenModal() {
-    //     // references are now sync'd and can be accessed.
-    //     subtitle.style.color = '#f00';
-    // }
     
     const closeModal = () => {
-        console.log('Closing modal...');
-        setIsOpen(false);
+        // console.log('Closing modal...');
+        dispatch( uiCloseModal() );        
     }
 
     return (
         <div>
-        {/* <button onClick={openModal}>Open Modal</button> */}
+
         <Modal 
-            isOpen= { modalIsOpen } 
-        //   onAfterOpen={afterOpenModal}
-          onRequestClose = { closeModal }
-          style = { customStyles }
-          className = "modal "
-          overlayClassName = "modal-fondo"
-          closeTimeoutMS = {200}
+            isOpen= { modalOpen || false } 
+            onRequestClose = { closeModal }
+            style = { customStyles }
+            className = "modal "
+            overlayClassName = "modal-fondo"
+            closeTimeoutMS = {200}
         >
             <h1> Nuevo evento </h1>
             <hr />

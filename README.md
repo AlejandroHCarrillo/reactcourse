@@ -49,6 +49,139 @@ src/routers : contiene los routers utilizados en la app
 src/types   : contiene un archivo con los enumeradores
 src/tests   : dentro de este folder replicaremos la misma estructura de src con los tests de los archivos.
 
+
+### Receta de cocina:
+
+1. Crear el proyecto
+2. Crear los componentes Basicos
+3. Crear el o los Routers ej. AppRouter
+4. Crear crear los enumeradores en el archivo types
+5. Crear el o los reducers especificos (ej. uiReducer )
+6. Crear el rootReducer (Usar plantilla)
+7. Crear el store (Usar Plantilla)
+8. Crear las acciones
+
+### Archivos de acciones
+Los archivos de acciones construyen los objetos que que seran procesados por el reducer. La estrucctura basica de una accion contiene el ***type***, que es el nombre de la accion a realizar y el ***payload*** ver el ejemplo siguiente:
+
+```
+export const reducerAction = () => ({ 
+  type: types.add 
+  payload: {
+    // Objeto con toda la informacion relacionada a la accion a realizar
+  }
+  });
+```
+
+### Ejemplo archivo de reducer
+```
+import { types } from "../types/types";
+
+const initialState = {
+    modalOpen: false
+}
+
+export const uiReducer = ( ( state = initialState, action ) => {
+    switch ( action.type ) {
+        case types.uiOpenModal:            
+            return {
+                ...state,
+                modalOpen: true
+            };
+        case types.uiCloseModal:            
+            return {
+                ...state,
+                modalOpen: false
+            };
+        default:
+            return state;
+    }
+
+});
+```
+
+### El rootReducer
+El archivo rootReducer concentra todos los reducers en un solo archivo
+```
+import { combineReducers } from "redux";
+import { calendarReducer } from "./calendarReducer";
+import { uiReducer } from "./uiReducer";
+
+export const rootReducer = combineReducers({
+    ui: uiReducer,
+    calendar: calendarReducer
+    // authReducer:
+});
+```
+
+### El useState
+El use state sirve para manipular las variables (ahora constantes)
+```
+  import React, { useState } from 'react'
+
+  const [valor, setValor] = useState( estadoInicial );
+```
+
+El "valor" es el contenido de la constante puede ser usado para mostrar la informacion que contiene, pero no puede ser modificado directamente.
+
+setValor es una funcion encargada de reescribir la constate con el nuevo valor enviado en los parametros.
+
+El estado inicial es el valor por default que va a tener la constate al inicio de la ejecucion.
+
+### UseSelector
+El useSelector permite leer el contenido del store, ya sea completo o una sola seccion
+
+Uso:
+```
+  import { useSelector } from 'react-redux';
+
+
+  const { modalOpen } = useSelector( state => state.ui );
+```
+
+### useDispatch
+Permite ejecutar una accion contenida en el reducer 
+
+Uso:
+´´´
+import { useSelector } from 'react-redux';
+
+    const dispatch = useDispatch();
+
+    dispatch( reducerAction() );
+´´´
+
+
+
+## Herramientas de dasarrollo Redux DevTools Extension
+
+https://extension.remotedev.io/
+
+### Instalacion:
+``` 
+
+``` 
+### Configuracion: 
+``` 
+https://extension.remotedev.io/#usage
+``` 
+### Uso 
+``` 
+import { createStore, compose, applyMiddleware } from "redux";
+import thunk from "redux-thunk";
+import { rootReducer } from "../reducers/rootReducer";
+
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
+export const store = createStore(
+    rootReducer,
+    composeEnhancers (
+        applyMiddleware( thunk )
+    )
+);
+``` 
+---
+
 ## Pruebas o Testing Enzime 
 
 Enzyme es una utilidad de prueba de JavaScript para React que facilita la prueba de la salida de sus componentes de React. También puede manipular, atravesar y, de alguna manera, simular el tiempo de ejecución dado el resultado.
@@ -677,5 +810,28 @@ function MyApp() {
     </div>
   );
 }
+``` 
+---
+##  react-redux
+React Redux es el enlace oficial de React para Redux. Permite a sus componentes React leer datos de una tienda Redux y enviar acciones a la tienda para actualizar los datos.
+
+https://react-redux.js.org/introduction/quick-start
+
+### Instalacion: 
+``` 
+npm install react-redux
+``` 
+Instalar todo de una vez
+```
+npm install react-redux redux redux-thunk
+```
+
+### Configuracion: 
+``` 
+
+``` 
+### Uso 
+``` 
+
 ``` 
 ---
