@@ -75,6 +75,12 @@ export const reducerAction = () => ({
 
 ### Hooks
 
+Los Hooks son una nueva incorporación en React 16.8. Te permiten usar estado y otras características de React sin escribir una clase.
+
+Los Hooks son funciones de JavaScript, pero necesitas seguir dos reglas cuando los uses. Proporcionamos un plugin de linter para hacer cumplir estas reglas automáticamente.
+
+https://www.npmjs.com/package/eslint-plugin-react-hooks
+
 https://es.reactjs.org/docs/hooks-rules.html
 
 
@@ -852,3 +858,75 @@ npm install react-redux redux redux-thunk
 
 ``` 
 ---
+
+
+## Backend
+
+1. Crear el directorio
+2. Inicializar el directorio node que crea un package.json
+``` 
+npm init -y 
+```
+3. Crear archivo en la raiz index.js
+para ejecutar el archivo de javascript hay que ejecutar
+```
+node index.js
+```
+4. Instalar Nodemon, sirve para reiniciar la ejecucion de los scripts cada que cambien.
+
+Instalacion:
+```
+npm i nodemon -g
+```
+
+Uso:
+```
+nodemon index.js
+```
+
+5. Agregar los scripts npm al package.json
+```
+  "scripts": {
+    "dev": "nodemon index.js",
+    "start": "node index.js"
+  }
+```
+Uso:
+```
+  c:\xxx\npm run dev
+  c:\xxx\npm start
+```
+6. Instalar express
+```
+npm i express
+o
+npm i express@4.17.1
+```
+
+7. Configurar express en el index.js
+```
+const express = require('express');
+```
+
+8. Crear la app de express
+```
+const app = express();
+```
+
+9. Escuchar las peticiones
+```
+app.listen(4000, ()=>{
+    console.log(`Servidor corriendo en el puerto ${ 4000 }`);
+    
+  });
+```
+Listo el back end server esta listo para recibir peticiones
+
+10. Configurar rutas
+```
+app.get('/', (req, res) => {
+    console.log("Requiere poner /");
+    res.json({ ok: true});
+});
+```
+
