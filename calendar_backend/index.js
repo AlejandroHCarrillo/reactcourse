@@ -1,15 +1,22 @@
 // console.log("I'm batman !!!");
 const express = require('express');
+require('dotenv').config();
+
+// console.log(process.env);
+
 // Crea el servidor express
 const app = express();
 
-// Configuracion de rutas
-app.get('/', (req, res) => {
-    console.log("Requiere poner /");
-    res.json({ ok: true});
-});
+// Especificamos la ruta donde se van a habilitar las rutas de auth
+app.use('/api/auth', require('./routes/auth'));
 
-app.listen(4000, ()=>{
-    console.log(`Servidor corriendo en el puerto ${ 4000 }`);
+// TODO: Rutas crud
+
+
+// Directorio publico
+app.use(express.static('public'));
+
+app.listen(process.env.PORT, ()=>{
+    console.log(`Servidor corriendo en el puerto ${ process.env.PORT }`);
     
   });

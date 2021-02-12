@@ -930,3 +930,20 @@ app.get('/', (req, res) => {
 });
 ```
 
+11. Establecer ruta publica
+```
+app.use(express.static('public'));
+```
+
+12. Crear archivo de configuracion .env en la raiz
+instalar dotenv
+```
+npm i dotenv
+```
+Uso:
+Poner en la seguda linea de index.js
+```
+require('dotenv').config();
+o 
+const dotenv = require('dotenv').config();
+```
