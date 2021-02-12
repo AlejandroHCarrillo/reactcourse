@@ -56,10 +56,10 @@ src/tests   : dentro de este folder replicaremos la misma estructura de src con 
 2. Crear los componentes Basicos
 3. Crear el o los Routers ej. AppRouter
 4. Crear crear los enumeradores en el archivo types
-5. Crear el o los reducers especificos (ej. uiReducer )
-6. Crear el rootReducer (Usar plantilla)
-7. Crear el store (Usar Plantilla)
-8. Crear las acciones
+5. Crear las acciones
+6. Crear el o los reducers especificos (ej. uiReducer )
+7. Crear el rootReducer (Usar plantilla)
+8. Crear el store (Usar Plantilla)
 
 ### Archivos de acciones
 Los archivos de acciones construyen los objetos que que seran procesados por el reducer. La estrucctura basica de una accion contiene el ***type***, que es el nombre de la accion a realizar y el ***payload*** ver el ejemplo siguiente:
@@ -72,6 +72,11 @@ export const reducerAction = () => ({
   }
   });
 ```
+
+### Hooks
+
+https://es.reactjs.org/docs/hooks-rules.html
+
 
 ### Ejemplo archivo de reducer
 ```
@@ -127,6 +132,18 @@ El "valor" es el contenido de la constante puede ser usado para mostrar la infor
 setValor es una funcion encargada de reescribir la constate con el nuevo valor enviado en los parametros.
 
 El estado inicial es el valor por default que va a tener la constate al inicio de la ejecucion.
+
+### use Effect
+El use efect es como un observador que se ejecuta cuando cambia el estado de lo(s) elementos en el arraglo del segundo parametro 
+```
+import React, { useEffect } from 'react'
+
+    useEffect(() => {
+        if ( activeEvent ){
+            setFormValues(activeEvent);
+        }
+    }, [activeEvent]);
+```
 
 ### UseSelector
 El useSelector permite leer el contenido del store, ya sea completo o una sola seccion

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Calendar, momentLocalizer } from 'react-big-calendar';
 import moment from 'moment';
 
@@ -11,8 +11,9 @@ import { CalendarEventModal } from './CalendarEventModal';
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import 'moment/locale/es';
 import { uiOpenModal } from '../../actions/ui';
-import { eventSetActive } from '../../actions/events';
+import { eventClearActiveEvent, eventSetActive, setCurrentStartDate } from '../../actions/events';
 import { AddNewFab } from '../ui/AddNewFab';
+import { DeleteEventFab } from '../ui/DeleteEventFab';
 
 moment.locale('es');
 
@@ -20,51 +21,35 @@ moment.locale('es');
 // to the correct localizer.
 const localizer = momentLocalizer(moment); // or globalizeLocalizer
 
-const events = [{
-    title: 'Mi cumpleaños',
-    start: moment().toDate(),
-    end: moment().add(2, 'hours').toDate(),
-    bgcolor: '#fa0023', 
-    notes: 'Comprar el regalo para mi',
-    user: {
-        _id: '123',
-        name: 'Jhon Kmaney'
-    }
-},
-{
-    title: 'Declarar a hacienda',
-    start: moment().add(3, 'hours').toDate(),
-    end: moment().add(4, 'hours').toDate(),
-    bgcolor: '#fa0023', 
-    notes: 'Hacer declaracion anual',
-    user: {
-        id: '234',
-        name: 'Elmer'
-    }
-},
-]
-
 export const CalendarScreen = () => {
-
     const dispatch = useDispatch();
+
+    const { events, activeEvent } = useSelector( state => state.calendar );
     
     const [lastView, setLastView] = useState( localStorage.getItem('lastview') || 'month' )
    
     const onDoubleClick = (e) => {
-        // console.log('Abriendo modal...'); 
         dispatch( uiOpenModal() );
     };
-
+    
     const onSelectEvent = (e) => {
         dispatch( eventSetActive(e) );
     };
 
     const onViewEvent = (e) => {
-        console.log("onViewEvent: ", e);
+        // console.log("onViewEvent: ", e);
         setLastView(e);
         localStorage.setItem('lastview', e);
     };
 
+    const onSelectedSlot = (e) => {
+        dispatch( eventClearActiveEvent() );
+
+        if(e.action==='doubleClick'){
+            dispatch( setCurrentStartDate( e.start ) )
+            dispatch( uiOpenModal() );
+        }
+    }
 
     // Configuramos el estilo del evento a mostar
     const eventStyleGetter = ( event, start, end, isSelected ) => {
@@ -86,7 +71,7 @@ export const CalendarScreen = () => {
 
             <Calendar
                 localizer = { localizer }
-                events = { events }
+                events = { events || [] }
                 startAccessor = "start"
                 endAccessor = "end"
                 messages = { messages }
@@ -94,6 +79,8 @@ export const CalendarScreen = () => {
                 onDoubleClickEvent = { onDoubleClick }
                 onSelectEvent = { onSelectEvent } 
                 onView = { onViewEvent }
+                selectable = { true }
+                onSelectSlot = { onSelectedSlot }
                 view = {lastView}
                 components={{
                     event: CalendarEvent
@@ -101,7 +88,7 @@ export const CalendarScreen = () => {
             />
 
             <AddNewFab/>
-            
+            { activeEvent && <DeleteEventFab/> }
             <CalendarEventModal/>
 
         </div>
