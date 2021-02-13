@@ -859,6 +859,8 @@ npm install react-redux redux redux-thunk
 ``` 
 ---
 
+### Colores de consola
+https://stackoverflow.com/questions/9781218/how-to-change-node-jss-console-font-color
 
 ## Backend
 
@@ -935,7 +937,12 @@ app.get('/', (req, res) => {
 app.use(express.static('public'));
 ```
 
-12. Crear archivo de configuracion .env en la raiz
+12. Crear archivo de configuracion .env en la raiz y crear las variables de entorno
+Ejemplo:
+```
+VARIABLE=4000
+```
+
 instalar dotenv
 ```
 npm i dotenv
@@ -946,6 +953,11 @@ Poner en la seguda linea de index.js
 require('dotenv').config();
 o 
 const dotenv = require('dotenv').config();
+```
+
+Para acceder a las variables guardadas en el archivo .env hay que usar 
+```
+process.env.VARIABLE
 ```
 
 13. Leer y parsear el body
@@ -1009,3 +1021,57 @@ https://www.restapitutorial.com/httpstatuscodes.html
 * 4xx Client Error
 * 5xx Server Error
 
+15. Conexion a base de datos Mongo DB usando Mongoose
+
+## Base de datos en la nube MongoDB Atlas
+
+Implemente MongoDB en la nube con solo unos pocos clics. Atlas se basa en la mejor automatización de su clase y prácticas comprobadas que ayudan a proporcionar disponibilidad continua, escalabilidad elástica, rendimiento rápido y soporte con cumplimiento normativo. Es la forma más sencilla de probar MongoDB gratis en AWS, Google Cloud y Azure.
+
+https://www.mongodb.com/
+
+https://www.mongodb.com/try
+
+https://cloud.mongodb.com/v2/60272ad42d797c3de3467d96#security/database/users
+
+## Mongoose
+
+Mongoose es un ORM que proporciona una solución sencilla basada en esquemas para modelar los datos de su aplicación. Incluye conversión de tipo integrada, validación, creación de consultas, enlaces de lógica empresarial y más, listo para usar.
+
+https://mongoosejs.com/
+
+```
+npm install mongoose --save
+o 
+npm i mongoose
+```
+
+Crear archivo config.js en el un nuevo folder llamado database
+```
+const mongoose = require('mongoose');
+mongoose.connect('mongodb://localhost:27017/test', {useNewUrlParser: true, useUnifiedTopology: true});
+
+const Cat = mongoose.model('Cat', { name: String });
+
+const kitty = new Cat({ name: 'Zildjian' });
+kitty.save().then(() => console.log('meow'));
+```
+### Encriptar los passwords
+https://www.npmjs.com/package/bcryptjs
+
+```
+npm install bcryptjs
+```
+
+Para encriptar un password:
+```
+var bcrypt = require('bcryptjs');
+var salt = bcrypt.genSaltSync(10);
+var hash = bcrypt.hashSync("B4c0/\/", salt);
+```
+
+To check a password:
+```
+// Load hash from your password DB.
+bcrypt.compareSync("B4c0/\/", hash); // true
+bcrypt.compareSync("not_bacon", hash); // false
+```

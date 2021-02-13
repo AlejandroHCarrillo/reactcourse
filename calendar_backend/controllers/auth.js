@@ -2,54 +2,66 @@
  * Este controlador regresa las respuestas a las rutas solicitadas para la autentificacion de usuarios
  */
 const express = require('express');
-// const { validationResult } = require('express-validator');
+const bcrypt = require('bcryptjs');
+const Usuario = require('../models/UsuarioModel')
 
-
-const createUser =  (req, res = express.response ) => {
+const createUser = async(req, res = express.response ) => {
     // console.log(req.body);
 
     // Obtenemos la informacion del body
-    const { name, email, password } = req.body;
+    const { email, password } = req.body;
 
-    // Las validaciones se movieron al middleware validar-campos
-    // Validacion Manual
-    // if (name.length < 5){
-    //     return res.status(400).json({ 
-    //         ok: false,
-    //         msg: 'El nombre debe ser al menos de 5 letras',
-    //     });   
-    // }
+    try{
+        let usuario = await Usuario.findOne({ email });
 
-    res.status(201).json({ 
-        ok: true,
-        msg: 'register user from controller',
-        name,
-        email,
-        password
-    });
+        // console.log("usuario: ", usuario);
+        if( usuario ){
+            return res.status(400).json({
+                    ok: false,
+                    msg: 'Ya existe un usuario con el correo: ' + email
+                });
+        }
+
+        usuario = new Usuario(req.body);
+
+        const salt = bcrypt.genSaltSync();
+        usuario.password = bcrypt.hashSync( password, salt );
+
+        await usuario.save();                
+        
+        res.status(201).json({ 
+            ok: true,
+            msg: `Usuario ${ usuario.name } ha sido registrado con exito`,
+            uid: usuario.id,
+            name: usuario.name
+        });
+
+    } catch( error ){
+        // console.log(error);
+        res.status(500).json({
+            ok: false,
+            msg: 'Error, por favor contacte a su admistrador',
+            error: error
+        })
+    }
 };
 
 const LoginUser =  (req, res = express.response ) => {
     // Obtenemos la informacion del body
     const { name, email, password } = req.body;
 
-    // Las validaciones se movieron al middleware validar-campos
-    // Validacion automatica
-    // // Revisamos las validaciones 
-    // const errors = validationResult(req);
-    // console.log("errors: ", errors);
-    // // Si hay errores regresamos una respuesta con los errores
-    // if ( !errors.isEmpty() ){
-    //     return res.status(400).json({ 
-    //             ok: false,
-    //             errors: errors.mapped(),
-    //         });       
-    // }
-
-    res.json({ 
-        ok: true,
-        msg: 'Login from controller'
-    });
+    try{
+        res.json({ 
+            ok: true,
+            msg: 'Login from controller'
+        });
+    } catch( error ){
+        console.log(error);
+        res.status(500).json({
+            ok: false,
+            msg: 'Error, por favor contacte a su admistrador'
+        })
+    }
 };
 
 const renewToken =  (req, res = express.response ) => {
