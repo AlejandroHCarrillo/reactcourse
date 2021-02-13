@@ -947,3 +947,65 @@ require('dotenv').config();
 o 
 const dotenv = require('dotenv').config();
 ```
+
+13. Leer y parsear el body
+En el index.js:
+´´´
+app.use( express.json );
+´´´
+en el controlador:
+´´´
+    // Obtenemos la informacion del body
+    const { name, email, password } = req.body;
+
+    // validamos la longitid del nombre y regresamos un codigo de error
+    if (name.length < 5){
+        return res.status(400).json({ 
+            ok: false,
+            msg: 'El nombre debe ser al menos de 5 letras',
+        });   
+    }
+´´´
+
+NOTA: Solo se puede enviar una respuesta por lo que se recomienda poner un return a casa response para que la ejecucion termine al regresarla.
+
+14. Validaciones automaticas
+Para evitar hacer el codigo de validaciones manuales dentro de la funcion hay que instalar un validador automatico.
+
+https://express-validator.github.io/docs/
+
+´´´
+npm install --save express-validator
+o 
+npm i express-validator
+´´´
+
+Ejemplo de como mandar las validaciones:
+´´´
+// Configuracion de rutas para que ejecuten una funcion del controlador (createUser)
+// Las validaciones se hacen con el check 
+// se pueden mandar tantas como sean necesarias, una por cada campo a validar 
+router.post('/new',
+            check('name', 'El nombre es obligatorio')
+                .not().isEmpty(),
+            check('email', 'El email no es valido').isEmail(),
+            check('password', 'The password must be 5+ chars long and contain a number')
+                .not()
+                .isIn(['123', 'password', 'god'])
+                .withMessage('Do not use a common word as the password')
+                .isLength({ min: 5 })
+                .matches(/\d/)            
+            ,
+            createUser );
+´´´
+
+## Codigos de estado HTTP
+
+https://www.restapitutorial.com/httpstatuscodes.html
+
+* 1xx Informational
+* 2xx Success
+* 3xx Redirection
+* 4xx Client Error
+* 5xx Server Error
+
