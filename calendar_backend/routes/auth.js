@@ -7,6 +7,8 @@ const { check } = require('express-validator');
 const { validarCampos } = require('../middlewares/validar-campos');
 // Importamos las funciones del controlador auth
 const { createUser, LoginUser, renewToken } = require('../controllers/auth');
+const { validarJWT } =require('../middlewares/validar-jwt');
+
 
 const router = Router();
 
@@ -36,7 +38,7 @@ router.post('/',
             , validarCampos,
             LoginUser );
 
-router.get('/renew', renewToken);
+router.get('/renew', validarJWT, renewToken);
 
 // Exportamos el router
 module.exports = router;

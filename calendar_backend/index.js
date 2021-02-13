@@ -1,6 +1,7 @@
 // console.log("I'm batman !!!");
 const express = require('express');
 const { dbConnection } = require('./database/config');
+const cors = require('cors');
 const { cons_color } = require('./config/console-colors');
 
 require('dotenv').config();
@@ -9,6 +10,9 @@ require('dotenv').config();
 
 // Crea el servidor express
 const app = express();
+
+// Habilitar CORS
+app.use('cors');
 
 // Conexion a la base de datos
 dbConnection();

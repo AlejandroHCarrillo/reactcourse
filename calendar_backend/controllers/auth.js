@@ -1,11 +1,13 @@
 /**
  * Este controlador regresa las respuestas a las rutas solicitadas para la autentificacion de usuarios
  */
-const express = require('express');
+const { response } = require('express');
 const bcrypt = require('bcryptjs');
-const Usuario = require('../models/UsuarioModel')
+const Usuario = require('../models/UsuarioModel');
+const { generateJWT } = require('../helpers/jwt')
+const { cons_color } = require('../config/console-colors');
 
-const createUser = async(req, res = express.response ) => {
+const createUser = async(req, res = response ) => {
     // console.log(req.body);
 
     // Obtenemos la informacion del body
@@ -27,33 +29,62 @@ const createUser = async(req, res = express.response ) => {
         const salt = bcrypt.genSaltSync();
         usuario.password = bcrypt.hashSync( password, salt );
 
-        await usuario.save();                
+        await usuario.save();
+
+        // Generar el token
+        const token = await generateJWT(usuario.id, usuario.name);
         
         res.status(201).json({ 
             ok: true,
-            msg: `Usuario ${ usuario.name } ha sido registrado con exito`,
+            // msg: `Usuario ${ usuario.name } ha sido registrado con exito`,
             uid: usuario.id,
-            name: usuario.name
+            name: usuario.name,
+            token
         });
 
     } catch( error ){
-        // console.log(error);
+        console.log(error);
         res.status(500).json({
             ok: false,
-            msg: 'Error, por favor contacte a su admistrador',
-            error: error
+            msg: 'Error, por favor contacte a su admistrador'
         })
     }
 };
 
-const LoginUser =  (req, res = express.response ) => {
+const LoginUser = async (req, res = express.response ) => {
     // Obtenemos la informacion del body
-    const { name, email, password } = req.body;
-
+    const {email, password } = req.body;    
+    const usuario = await Usuario.findOne({ email });
     try{
+
+        // console.log("usuario: ", usuario);
+        if( !usuario ){
+            return res.status(400).json({
+                    ok: false,
+                    // msg: 'El usuario no existe.'
+                    msg: 'Error de autenticacion.'
+                });
+        }
+
+        // revisar password encriptado
+        const isValid = bcrypt.compareSync(password, usuario.password);
+
+        if (!isValid){
+            return res.status(400).json({
+                ok: false,
+                // msg: 'El password es incorrecto.'
+                msg: 'Error de autenticacion.'
+            });    
+        }
+        // Generar el token
+        const token = await generateJWT(usuario.id, usuario.name);
+
         res.json({ 
             ok: true,
-            msg: 'Login from controller'
+            name: usuario.name,
+            uid: usuario.id,
+            // msg: 'Login OK'
+            token
         });
     } catch( error ){
         console.log(error);
@@ -64,10 +95,17 @@ const LoginUser =  (req, res = express.response ) => {
     }
 };
 
-const renewToken =  (req, res = express.response ) => {
+const renewToken = async (req, res = express.response ) => {
+    const { uid, name } = req;
+
+    // Generar el token
+    const token = await generateJWT(uid, name);
+
     res.json({ 
         ok: true,
-        msg: 'Renew token from controller'
+        token,
+        // uid,
+        // msg: 'Renew token from controller'
     });
 };
 

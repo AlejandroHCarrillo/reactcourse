@@ -1075,3 +1075,41 @@ To check a password:
 bcrypt.compareSync("B4c0/\/", hash); // true
 bcrypt.compareSync("not_bacon", hash); // false
 ```
+
+### Jason Web Tocken JWT
+
+https://jwt.io/
+
+Instalacion: 
+``` 
+npm i jsonwebtoken
+```  
+
+Ejemplo de uso: 
+``` 
+const jwt = require('jsonwebtoken');
+
+// Generar el token
+const token = await generateJWT(uid, name);
+
+// Verificar token
+const payload = jwt.verify(token, process.env.SECRET_JWT_SEED);        
+
+``` 
+
+### Habilitar CORS
+
+https://www.npmjs.com/package/cors
+
+https://enable-cors.org/
+
+Install : 
+``` 
+npm i cors
+``` 
+
+Uso: 
+``` 
+// Habilitar CORS
+app.use('cors');
+``` 
