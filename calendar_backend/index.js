@@ -1,7 +1,6 @@
-// console.log("I'm batman !!!");
 const express = require('express');
 const { dbConnection } = require('./database/config');
-const cors = require('cors');
+const cors = require('cors')
 const { cons_color } = require('./config/console-colors');
 
 require('dotenv').config();
@@ -11,11 +10,11 @@ require('dotenv').config();
 // Crea el servidor express
 const app = express();
 
-// Habilitar CORS
-app.use('cors');
-
 // Conexion a la base de datos
 dbConnection();
+
+// Habilitar CORS
+app.use(cors())
 
 // Directorio publico
 app.use(express.static('public'));
@@ -25,6 +24,7 @@ app.use( express.json() );
 
 // Especificamos la ruta donde se van a habilitar las rutas de auth
 app.use('/api/auth', require('./routes/auth'));
+app.use('/api/events', require('./routes/events'));
 
 // TODO: Rutas crud
 

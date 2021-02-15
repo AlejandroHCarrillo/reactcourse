@@ -7,7 +7,7 @@ const { check } = require('express-validator');
 const { validarCampos } = require('../middlewares/validar-campos');
 // Importamos las funciones del controlador auth
 const { createUser, LoginUser, renewToken } = require('../controllers/auth');
-const { validarJWT } =require('../middlewares/validar-jwt');
+const { validarJWT } = require('../middlewares/validar-jwt');
 
 
 const router = Router();
@@ -18,8 +18,7 @@ const router = Router();
 // Se creo el middleware validarCampos el cual verifica que se cumplan las condiciones de los checks
 // si no cumplen con las condiciones de los checks regresa una respuesta 400 con los errores 
 router.post('/new',
-            check('name', 'El nombre es obligatorio')
-                .not().isEmpty(),
+            check('name', 'El nombre es obligatorio').not().isEmpty(),
             check('email', 'El email no es valido').isEmail(),
             check('password', 'The password must be 5+ chars long and contain a number')
                 .not()
