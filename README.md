@@ -1113,3 +1113,39 @@ Uso:
 // Habilitar CORS
 app.use('cors');
 ``` 
+
+
+## Desplegar el backend en Heroku
+
+hyyp://heroku.com
+
+https://devcenter.heroku.com/articles/heroku-cli#download-and-install
+
+Check version: 
+``` 
+heroku --version
+``` 
+
+uso: 
+```
+ heroku login
+
+## Initialize a git repository in a new or existing directory
+
+cd my-project/
+git init
+heroku git:remote -a calendar-backend-node
+
+git push heroku main
+
+```
+
+https://calendar-backend-node.herokuapp.com/api/auth/
+
+Ver logs: 
+``` 
+# escucha los ultimos cambios en el log
+heroku logs --tail
+o
+heroku logs -n 1000 --tail
+``` 
