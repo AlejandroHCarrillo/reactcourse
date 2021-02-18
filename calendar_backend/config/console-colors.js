@@ -24,6 +24,7 @@ const cons_color = {
     BgMagenta: "\x1b[45m",
     BgCyan: "\x1b[46m",
     BgWhite: "\x1b[47m",
+
 }
 
 module.exports = { cons_color };
