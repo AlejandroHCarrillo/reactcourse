@@ -1136,6 +1136,12 @@ cd my-project/
 git init
 heroku git:remote -a calendar-backend-node
 
+## Cada que halla cambios en el branch de git hay que darles commit
+## Despues de darle commit en git hay que mandar los cambios en el branch de heroku
+git add -A
+git commit -m "bla bla"
+
+
 git push heroku main
 
 ```

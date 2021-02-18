@@ -20,18 +20,18 @@ const router = Router();
 router.post('/new',
             check('name', 'El nombre es obligatorio').not().isEmpty(),
             check('email', 'El email no es valido').isEmail(),
-            check('password', 'The password must be 5+ chars long and contain a number')
+            check('password', 'El password debe ser de al menos 5+ caracteres de largo y contener al menos un numero')
                 .not()
                 .isIn(['123', 'password', 'god'])
-                .withMessage('Do not use a common word as the password')
+                .withMessage('No debe usar paswords comunes')
                 .isLength({ min: 5 })
-                .matches(/\d/)            
+                .matches(/\d/)
             , validarCampos,
             createUser );
 
 router.post('/',
             check('email', 'El email no es valido').isEmail(),
-            check('password', 'The password must be 5+ chars long and contain a number')
+            check('password', 'El password no es valido')
                 .not().isEmpty()
                 .isLength({ min: 5 })
             , validarCampos,

@@ -5,8 +5,6 @@ const { cons_color } = require('./config/console-colors');
 
 require('dotenv').config();
 
-// console.log(process.env);
-
 // Crea el servidor express
 const app = express();
 
@@ -30,9 +28,10 @@ app.use('/api/events', require('./routes/events'));
 
 
 app.listen(process.env.PORT, ()=>{
-    const {BgBlue, FgWhite, Reset} = cons_color;
+    const {BgBlue, FgWhite, Reset, FgYellow, Blink, BgGreen} = cons_color;
+    console.log(FgYellow, "REACT_APP_API_URL: ", BgBlue, process.env.REACT_APP_API_URL, Reset);
 
     console.log(BgBlue, FgWhite, 
-      `Servidor corriendo en el puerto ${ process.env.PORT }`, 
+      `Servidor corriendo en el puerto ${ process.env.PORT } at ${ new Date().getTime() }`, 
       Reset);
   });

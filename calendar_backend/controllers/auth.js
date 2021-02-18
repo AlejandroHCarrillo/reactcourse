@@ -26,6 +26,7 @@ const createUser = async(req, res = response ) => {
 
         usuario = new Usuario(req.body);
 
+        // Encriptamos el password
         const salt = bcrypt.genSaltSync();
         usuario.password = bcrypt.hashSync( password, salt );
 
@@ -34,6 +35,7 @@ const createUser = async(req, res = response ) => {
         // Generar el token
         const token = await generateJWT(usuario.id, usuario.name);
         
+        console.log("aqui");
         res.status(201).json({ 
             ok: true,
             // msg: `Usuario ${ usuario.name } ha sido registrado con exito`,
@@ -62,7 +64,7 @@ const LoginUser = async (req, res = express.response ) => {
             return res.status(400).json({
                     ok: false,
                     // msg: 'El usuario no existe.'
-                    msg: 'Error de autenticacion.'
+                    msg: 'Error de autenticacion(u).'
                 });
         }
 
@@ -73,7 +75,7 @@ const LoginUser = async (req, res = express.response ) => {
             return res.status(400).json({
                 ok: false,
                 // msg: 'El password es incorrecto.'
-                msg: 'Error de autenticacion.'
+                msg: 'Error de autenticacion(p).'
             });    
         }
         // Generar el token
@@ -103,6 +105,8 @@ const renewToken = async (req, res = express.response ) => {
 
     res.json({ 
         ok: true,
+        uid: uid,
+        name: name,
         token,
         // uid,
         // msg: 'Renew token from controller'

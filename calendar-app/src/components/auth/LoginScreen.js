@@ -1,8 +1,13 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
+import Swal from 'sweetalert2';
+import { startLogin, startRegister } from '../../actions/auth';
 import { useForm } from '../../hooks/useForm';
 import './login.css';
 
 export const LoginScreen = () => {
+    const dispatch = useDispatch();
+    
     const initialLoginForm = {
         lEmail: '',
         lPassword: ''
@@ -23,10 +28,22 @@ export const LoginScreen = () => {
     const handleLogin = (e) => {
         e.preventDefault();
         console.log(formLoginValues);
+
+        dispatch( startLogin(lEmail, lPassword) );
+
     };
 
     const handleRegister = (e) => {
         e.preventDefault();
+
+        // Validar contraseñas iguales
+        if( rPassword !== rPassword2 ){
+            Swal.fire("Error", "La contraseña no coincide con la confirmacion", "error");
+            return;
+        }
+
+        dispatch( startRegister( rName, rEmail, rPassword ) );
+
     };
 
     return (

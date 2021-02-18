@@ -11,13 +11,12 @@ export const types = {
     eventUpdate: '[event] Update event',
     eventDelete: '[event] Delete event',
 
-    authCheckin: '[auth] Checking login state', 
-    authCheckinFinish: '[auth] Finish checking login state', 
+    authCheckingFinish: '[auth] Finish checking login state', 
     authStartLogin: '[auth] Starting login', 
     authLogin: '[auth] Login', 
     authStartRegister: '[auth] Start user register', 
     authRegister: '[auth] Eser register', 
     authStartTokenRenew: '[auth] Start token renew ', 
-    authLogout: '[auth] Logout ', 
+    authLogout: '[auth] Logout ' 
     
 }

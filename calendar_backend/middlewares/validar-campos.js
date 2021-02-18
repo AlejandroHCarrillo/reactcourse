@@ -11,11 +11,14 @@ const validarCampos = (req, res = response, next) => {
     // Revisamos las validaciones y regresamos una respuesta con los errores
     const errors = validationResult(req);
 //    console.log("errors: ", errors);
+    const errorMessages = errors.array().map(x=>x.msg);
+    // console.log("msgErrors: ", errorMessages);
     // Si hay errores regresamos una respuesta con los errores
     if ( !errors.isEmpty() ){
         return res.status(400).json({ 
                 ok: false,
                 errors: errors.mapped(),
+                msg: JSON.stringify( errorMessages )
             });       
     }
 

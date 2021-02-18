@@ -4,6 +4,8 @@ import { CalendarApp } from './CalendarApp';
 
 import "./styles/styles.css"
 
+console.log("process.env: ", process.env);
+
 ReactDOM.render(
     <CalendarApp />,
   document.getElementById('root')
