@@ -24,8 +24,9 @@ const getEvents = async(req, res = response ) => {
 }
 
 const createEvent = async(req, res = response ) => {
-    // Varificar que el evento exista
+    // Verificar que el evento exista
     // console.log( req.body );
+
     try{
 
         evento = new Evento(req.body);
@@ -81,7 +82,7 @@ const updateEvent = async(req, res = response ) => {
         
         const eventoActualizado = await Evento.findByIdAndUpdate(eventoId, nuevoEvento, { new: true } );
         
-        console.log( eventoActualizado );
+        // console.log( eventoActualizado );
         return res.status(200).json({ 
             ok: true,
             evento: eventoActualizado
@@ -92,6 +93,7 @@ const updateEvent = async(req, res = response ) => {
         return res.status(500).json({ 
             ok: false,
             msg: `[Evento Update] Hubo un error, contacte al administrador`,
+            errors: error
         });
 
     }
@@ -123,7 +125,7 @@ const deleteEvent = async(req, res = response ) => {
         
         const eventoEliminado = await Evento.findByIdAndDelete( eventoId  );
         
-        console.log( eventoEliminado );
+        // console.log( eventoEliminado );
         return res.status(200).json({ 
             ok: true,
             evento: eventoEliminado

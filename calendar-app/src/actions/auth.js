@@ -1,13 +1,14 @@
 import { useDispatch } from "react-redux";
 import Swal from "sweetalert2";
-import { fetchWithoutToken, fetchWithToken } from "../helpers/fetch";
+import { fetchSimple, fetchToken } from "../helpers/fetch";
 import { types } from "../types/types";
+import { eventLogout } from "./events";
 
 export const startLogin = (email, password) => {
     return async(dispatch)=> { 
         console.log("starting login with email: ", email, "password: ", password);
         
-        const resp = await fetchWithoutToken("auth", { email, password }, 'POST' );
+        const resp = await fetchSimple("auth", { email, password }, 'POST' );
         const body = await resp.json();
 
         console.log(body);
@@ -31,7 +32,7 @@ export const startRegister = (name, email, password) => {
     return async(dispatch)=> { 
         console.log("starting register with email: ", email, "password: ", password);
         
-        const resp = await fetchWithoutToken("auth/new", { name, email, password }, 'POST' );
+        const resp = await fetchSimple("auth/new", { name, email, password }, 'POST' );
         const body = await resp.json();
 
         console.log(body);
@@ -55,10 +56,8 @@ export const startRegister = (name, email, password) => {
 
 export const startChecking = () => {
     return async( dispatch ) => {
-        const resp = await fetchWithToken("auth/renew", 'GET' );
+        const resp = await fetchToken("auth/renew", 'GET' );
         const body = await resp.json();
-
-        console.log("Start checking: ", body);
 
         if( body.ok ){
             localStorage.setItem('token', body.token);
@@ -85,8 +84,17 @@ export const startLogout = () => {
     console.log("startLogout...");
     return ( dispatch ) =>{
         localStorage.clear();
+        dispatch ( eventLogout() );
         dispatch ( logout() );
     }
 }
 
 const logout = () => ({ type: types.authLogout });
+
+export const showRegisterScreen = () => ({ 
+    type: types.authShowRegister
+});
+
+export const hideRegisterScreen = () => ({ 
+    type: types.authHideRegister
+});

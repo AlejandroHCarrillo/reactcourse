@@ -6,7 +6,7 @@ import Modal from 'react-modal';
 import DateTimePicker from 'react-datetime-picker';
 import Swal from 'sweetalert2';
 import { uiCloseModal } from '../../actions/ui';
-import { eventAddNew, eventClearActiveEvent, eventSetActive, eventUpdate } from '../../actions/events';
+import { eventClearActiveEvent, eventStartAddNew, eventStartUpdate } from '../../actions/events';
 
 const customStyles = {
     content : {
@@ -28,7 +28,11 @@ let initEvent = {
     title: '',
     notes: '',
     start: now.toDate(),
-    end: nowPlus1.toDate()
+    end: nowPlus1.toDate(),
+    user: {
+        uid:"",
+        name:""
+    }
 };
 
 export const CalendarEventModal = () => {
@@ -38,11 +42,9 @@ export const CalendarEventModal = () => {
     const { modalOpen } = useSelector( state => state.ui );
     const { activeEvent, currentEventDate } = useSelector( state => state.calendar );
 
-    const [dateStart, setDateStart] = useState( now.toDate() );
-    const [dateEnd, setDateEnd] = useState( nowPlus1.toDate() );
+    const [dateStart, setDateStart] = useState( now.toDate());
+    const [dateEnd, setDateEnd] = useState( nowPlus1.toDate());
     const [titleIsValid, setTitleValid] = useState(true);
-
-    // const { activeEvent } = useSelector( state => state.calendar );
     
     const [formValues, setFormValues] = useState( initEvent );
     const { title, notes, start, end, id } = formValues;
@@ -56,13 +58,15 @@ export const CalendarEventModal = () => {
 
     useEffect(() => {
         if ( activeEvent ){
+            // console.log("usando evento activo");
             setFormValues( activeEvent );
-            setDateStart(activeEvent.start);
-            setDateEnd(activeEvent.end);
+            setDateStart( moment(activeEvent.start).toDate() );
+            setDateEnd( moment(activeEvent.end).toDate() );
         } else{
+            // console.log("usando evento NUEVO");
             setFormValues( initEvent );
-            setDateStart(initEvent.start);
-            setDateEnd(initEvent.end);
+            setDateStart( moment(initEvent.start).toDate() );
+            setDateEnd( moment(initEvent.end).toDate()  );
         }
     }, [activeEvent, currentEventDate]);
 
@@ -80,7 +84,7 @@ export const CalendarEventModal = () => {
         setDateStart(e);
         setFormValues({
             ...formValues,
-            start: e
+            start: moment(e).toDate()
         });
 
     }
@@ -90,7 +94,7 @@ export const CalendarEventModal = () => {
         setDateEnd(e);
         setFormValues({
             ...formValues,
-            end: e
+            end: moment(e).toDate()
         });
     }
 
@@ -98,10 +102,10 @@ export const CalendarEventModal = () => {
         e.preventDefault();
         // console.log(formValues);
 
-        const momentStart = moment( start );
-        const momentEnd = moment( end );
+        const momentStart = moment( new Date(start).getTime() );
+        const momentEnd = moment( new Date(end).getTime() );
 
-        if ( momentStart.isSameOrAfter(momentEnd) ){
+        if ( momentStart.isSameOrAfter( momentEnd ) ){
             const textError = 'La fecha fin debe ser mayor a la fecha inicial'
             console.log("textError: ", textError)
             return Swal.fire('Error', textError, 'error' );
@@ -114,14 +118,12 @@ export const CalendarEventModal = () => {
 
         setTitleValid(true);
         
-        if (id){
-            dispatch( eventUpdate( formValues ) );
+        // if (id){
+        if (activeEvent){
+            dispatch( eventStartUpdate( formValues ) );
         }
         else {
-            dispatch( eventAddNew( {
-                    ...formValues,
-                    id: new Date().getTime()
-                } ) );
+            dispatch( eventStartAddNew( formValues ) );
         }
             
         closeModal();
@@ -193,6 +195,7 @@ export const CalendarEventModal = () => {
                         onChange = { handleInputChange }
                     ></textarea>
                     <small id="emailHelp" className="form-text text-muted">Información adicional</small>
+                    Propietario: { activeEvent?.user?.name }
                 </div>
 
                 <button

@@ -1,17 +1,19 @@
-import React from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import Swal from 'sweetalert2';
-import { startLogin, startRegister } from '../../actions/auth';
+import { hideRegisterScreen, showRegisterScreen, startLogin, startRegister } from '../../actions/auth';
 import { useForm } from '../../hooks/useForm';
 import './login.css';
 
 export const LoginScreen = () => {
     const dispatch = useDispatch();
+    const { showRegister } = useSelector(state => state.auth);
     
     const initialLoginForm = {
         lEmail: '',
         lPassword: ''
     };
+
     const initialRegisterForm = {
         rName: '',
         rEmail: '',
@@ -20,14 +22,13 @@ export const LoginScreen = () => {
     };
     
     const [ formLoginValues, handleLoginInputChange, resetLogin ] = useForm( initialLoginForm );
-    const {lEmail, lPassword } = formLoginValues;
+    const { lEmail, lPassword } = formLoginValues;
 
     const [ formRegisterValues, handleRegisterInputChange, resetRegister ] = useForm( initialRegisterForm );
     const { rName, rEmail, rPassword, rPassword2 } = formRegisterValues;
 
     const handleLogin = (e) => {
         e.preventDefault();
-        console.log(formLoginValues);
 
         dispatch( startLogin(lEmail, lPassword) );
 
@@ -41,14 +42,22 @@ export const LoginScreen = () => {
             Swal.fire("Error", "La contraseña no coincide con la confirmacion", "error");
             return;
         }
-
         dispatch( startRegister( rName, rEmail, rPassword ) );
-
     };
+
+    const handleShowRegister = (  ) => {
+        dispatch( showRegisterScreen() );
+    }
+
+    const handleHideRegister = () =>{
+        dispatch( hideRegisterScreen() );
+    }
 
     return (
         <div className="container login-container">
+            show Register Screen? { showRegister ?'yes':'no'}
             <div className="row">
+            {!showRegister && 
                 <div className="col-md-6 login-form-1">
                     <h3>Ingreso</h3>
                     <form onSubmit={ handleLogin }>
@@ -73,15 +82,24 @@ export const LoginScreen = () => {
                             />
                         </div>
                         <div className="form-group">
-                            <input 
-                                type="submit"
+                            <input type="submit"
                                 className="btnSubmit"
                                 value="Login" 
                             />
                         </div>
+
+                        <div className="form-group">
+                            <input type="button"
+                                className="btn"
+                                value="Crear una cuenta"
+                                onClick={ handleShowRegister }
+                            />
+                        </div>
+
                     </form>
                 </div>
-
+                }
+                { showRegister && 
                 <div className="col-md-6 login-form-2">
                     <h3>Registro</h3>
                     <form onSubmit={ handleRegister }>
@@ -133,8 +151,17 @@ export const LoginScreen = () => {
                                 className="btnSubmit" 
                                 value="Crear cuenta" />
                         </div>
+
+                        <div className="form-group">
+                            <input type="button"
+                                className="btn"
+                                value="Ya tengo una cuenta"
+                                onClick={ handleHideRegister }
+                            />
+                        </div>
                     </form>
                 </div>
+                }
             </div>
         </div>
     )
