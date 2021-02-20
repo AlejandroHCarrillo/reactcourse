@@ -35,7 +35,6 @@ const createUser = async(req, res = response ) => {
         // Generar el token
         const token = await generateJWT(usuario.id, usuario.name);
         
-        console.log("aqui");
         res.status(201).json({ 
             ok: true,
             // msg: `Usuario ${ usuario.name } ha sido registrado con exito`,

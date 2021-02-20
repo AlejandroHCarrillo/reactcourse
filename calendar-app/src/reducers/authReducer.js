@@ -4,10 +4,11 @@ const initialState = {
     checking: true,
     // uid: null,
     // name: null,
+    showRegister: false
 }
 
 export const authReducer = (state = initialState, action) => {
-    console.log("Reducer ", action.type);
+    // console.log("Auth reducer ", action.type, action.payload );
     switch (action.type) {
         case types.authLogin:
             return {
@@ -20,6 +21,18 @@ export const authReducer = (state = initialState, action) => {
                 ...state,
                 checking: false
             };
+        case types.authShowRegister:
+                return {
+                    ...state,
+                    showRegister: true
+                };
+
+        case types.authHideRegister:
+                return {
+                    ...state,
+                    showRegister: false
+                };
+
         case types.authLogout:
             return { checking: false };
         default:

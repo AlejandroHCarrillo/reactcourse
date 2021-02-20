@@ -945,6 +945,8 @@ VARIABLE=4000
 
 instalar dotenv
 ```
+npm install --save-dev dotenv
+
 npm i dotenv
 ```
 Uso:
@@ -959,6 +961,28 @@ Para acceder a las variables guardadas en el archivo .env hay que usar
 ```
 process.env.VARIABLE
 ```
+
+Adding Temporary Environment Variables In Your Shell#
+Defining environment variables can vary between OSes. It’s also important to know that this manner is temporary for the life of the shell session.
+
+Windows (cmd.exe)#
+
+``` 
+set "REACT_APP_NOT_SECRET_CODE=abcdef" && npm start
+``` 
+
+
+12.1. Uso de variables de entorno en REACT
+
+``` 
+https://create-react-app.dev/docs/adding-custom-environment-variables/
+``` 
+Referencing Environment Variables in the HTML
+
+``` 
+<title>%REACT_APP_WEBSITE_NAME%</title>
+``` 
+
 
 13. Leer y parsear el body
 En el index.js:
