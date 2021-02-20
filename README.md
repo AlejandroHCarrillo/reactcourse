@@ -1164,11 +1164,19 @@ heroku git:remote -a calendar-backend-node
 ## Despues de darle commit en git hay que mandar los cambios en el branch de heroku
 git add -A
 git commit -m "bla bla"
+git push
 
 
 git push heroku main
 
 ```
+## Deployar el proyecto react
+En el directorio del proyecto correr el comando 
+```
+npm run build
+```
+Esto va a generar un folder llamado build en dentro del proyecto de react
+el contenido de este folder hay que compiarlo al directorio public del proyecto de react y volver a deployar el backend a heroku
 
 https://calendar-backend-node.herokuapp.com/api/auth/
 

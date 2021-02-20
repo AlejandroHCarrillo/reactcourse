@@ -7,7 +7,6 @@ export const Navbar = () => {
     const { name } = useSelector(state => state.auth);
 
     const handleLogout = () => {
-        console.log("iniciando logout...");
         dispatch( startLogout() );
     }
 

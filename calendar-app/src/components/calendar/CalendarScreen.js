@@ -68,7 +68,7 @@ export const CalendarScreen = () => {
     const eventStyleGetter = ( event, start, end, isSelected ) => {
         // console.log(event);
         const style = {
-            backgroundColor: (uid === event.user._id ) ? '#fa0523' : '#367CF7',
+            backgroundColor: (uid === event.user._id || uid === event.user.uid) ? '#fa0523' : '#367CF7',
             borderRadius: '2px',
             opacity: 0.7,
             display: 'block',
@@ -79,13 +79,11 @@ export const CalendarScreen = () => {
 
     return (
         <div className="calendar-screen">
-            {/* <h1>Calendar Screen works</h1> */}
             <Navbar />
 
             <Calendar
                 localizer = { localizer }
                 events = { myEvents || [] }
-                // events = { events || [] }
                 startAccessor = "start"
                 endAccessor = "end"
                 messages = { messages }

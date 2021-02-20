@@ -107,7 +107,6 @@ export const CalendarEventModal = () => {
 
         if ( momentStart.isSameOrAfter( momentEnd ) ){
             const textError = 'La fecha fin debe ser mayor a la fecha inicial'
-            console.log("textError: ", textError)
             return Swal.fire('Error', textError, 'error' );
         }
 

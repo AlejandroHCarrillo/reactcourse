@@ -6,7 +6,7 @@ import { eventLogout } from "./events";
 
 export const startLogin = (email, password) => {
     return async(dispatch)=> { 
-        console.log("starting login with email: ", email, "password: ", password);
+        // console.log("starting login with email: ", email, "password: ", password);
         
         const resp = await fetchSimple("auth", { email, password }, 'POST' );
         const body = await resp.json();
@@ -30,7 +30,7 @@ export const startLogin = (email, password) => {
 
 export const startRegister = (name, email, password) => {
     return async(dispatch)=> { 
-        console.log("starting register with email: ", email, "password: ", password);
+        // console.log("starting register with email: ", email, "password: ", password);
         
         const resp = await fetchSimple("auth/new", { name, email, password }, 'POST' );
         const body = await resp.json();
@@ -81,7 +81,7 @@ const login = ( user ) => ({
 });
 
 export const startLogout = () => {
-    console.log("startLogout...");
+    // console.log("startLogout...");
     return ( dispatch ) =>{
         localStorage.clear();
         dispatch ( eventLogout() );

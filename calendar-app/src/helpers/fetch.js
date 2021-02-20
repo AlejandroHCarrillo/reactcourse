@@ -1,21 +1,26 @@
-const baseURL = "http://localhost:4000/api";
-// const baseURL = process.env.REACT_APP_API_URL;
-console.log("development: ", process.env.development);
-if (!process.env.REACT_APP_API_URL){
-    console.log("VARIABLE UNDEFINED process.env.REACT_APP_API_URL: ", process.env.REACT_APP_API_URL);
-    console.log("HAY QUE REVISAR LAS VARIABLES DE PROCESOS DE ENTORNO");
-    console.log("baseURL ESTA HARD CODEADA AQUI"); 
-    console.log("baseURL: ", baseURL); 
+let baseURL = "http://localhost:4000/api";
+if (process.env.NODE_ENV === "development") {
+    baseURL = "http://localhost:4000/api";
 } else {
+    baseURL = "https://calendar-backend-node.herokuapp.com/api";
+}
 
+// console.log("development: ", process.env.development);
+if (process.env.NODE_ENV === "development" && !process.env.REACT_APP_API_URL){
+    // console.log("LA VARIABLE UNDEFINED process.env.REACT_APP_API_URL: ", process.env.REACT_APP_API_URL);
+    console.log("LA VARIABLE API_URL ESTA: ", process.env.REACT_APP_API_URL);
+    console.log("HAY QUE REVISAR LAS VARIABLES DE PROCESOS DE ENTORNO");
+    console.log("baseURL ESTA HARD CODEADA"); 
+    // console.log("baseURL: ", baseURL); 
+} 
+if (process.env.REACT_APP_API_URL){
+    baseURL = process.env.REACT_APP_API_URL;
     console.log("URRA YA ESTA LEYENDO LAS VARIABLES DE ENTORNO");
 };
 
 const fetchSimple = (endpoint, data, method = 'GET') => {
     const url = `${ baseURL }/${endpoint}/`;
-    // console.log("url: ", url );
-    // console.log("method: ", method );
-    // console.log("data: ", data );
+    // console.log("url: ", url, "method: ", method, "data: ", data );
 
     if ( method === 'GET' ){
         return fetch( url );

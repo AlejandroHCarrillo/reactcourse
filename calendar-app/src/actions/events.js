@@ -12,8 +12,6 @@ export const eventStartAddNew = ( event ) => {
 
     return async (dispatch, getState) => {
         const { uid, name } = getState().auth;
-        // console.log("Esto mando eventStartAddNew: ", event );
-
         try{
 
             const resp = await fetchToken('events', event, 'POST');
@@ -111,7 +109,7 @@ export const eventStartLoading = () => {
             if(body.ok){
                 const events = body.eventos;
                 //const events = processEvents(body.eventos);
-                console.log("Los eventos con fechas tipo date:", events);
+                // console.log("Los eventos con fechas tipo date:", events);
                 dispatch( eventLoaded(events) );
             }
         } catch (error){
